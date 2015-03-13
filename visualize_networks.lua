@@ -1,4 +1,4 @@
-require 'cunn'
+--require 'cunn'
 require 'pl'
 require 'paths'
 require 'optim'
@@ -18,23 +18,23 @@ require 'torch'
 require 'nn'
 require 'rmsprop'
 require 'image'
-require 'KLDCriterion'
-require 'LinearCR'
-require 'Reparametrize'
+require 'modules/KLDCriterion'
+require 'modules/LinearCR'
+require 'modules/Reparametrize'
 require 'cutorch'
 require 'cunn'
 require 'optim'
-require 'GaussianCriterion'
+require 'modules/GaussianCriterion'
 require 'testf'
 require 'utils'
 require 'config'
-require 'SelectiveGradientFilter'
-require 'SelectiveOutputClamp'
+require 'modules/SelectiveGradientFilter'
+require 'modules/SelectiveOutputClamp'
 require 'lfs'
 
 
 -- networks whose names contain this string will be rendered
-network_search_str = "invariance_scaled"
+network_search_str = "net"
 
 if false then
   base_directory = "/om/user/wwhitney/facegen"
@@ -136,7 +136,9 @@ end
 
 ---------------------- GENERALIZATION ----------------------
 faceid = 4
-local data_location = '/home/tejas/Documents/MIT/facegen/DATASET/CNN_DATASET/AZ_VARIED/face_' .. faceid
+
+local data_location = base_directory .. '/net/CNN_DATASET/AZ_VARIED/face_' .. faceid
+print(data_location)
 local bsize = 20
 
 skipnum = 0

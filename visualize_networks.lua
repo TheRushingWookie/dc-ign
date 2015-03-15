@@ -36,11 +36,7 @@ require 'lfs'
 -- networks whose names contain this string will be rendered
 network_search_str = "net"
 
-if false then
-  base_directory = "/om/user/wwhitney/facegen"
-else
-  base_directory = paths.concat(lfs.currentdir(), 'networks')
-end
+base_directory = paths.concat(lfs.currentdir(), 'networks')
 name_modifier_str = "sweep_pm_20"
 
 
@@ -107,12 +103,12 @@ for network_name in lfs.dir(base_directory) do
       print(network_name)
       local images = {}
       for _, dataset_type in ipairs(dataset_types) do
-        if lfs.attributes(base_directory ..'/tmp/'..network_name.."/"..dataset_type) ~= nil then
-          local last_epoch = lastepochnum(base_directory ..'/tmp/'..network_name.."/"..dataset_type)
+        print(lfs.attributes(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type) )
+        if lfs.attributes(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type) ~= nil then
+          local last_epoch = lastepochnum(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type)
 
-          local reconstruction_gt = torch.load('CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
-          local preds = torch.load(base_directory ..'/tmp/'..network_name.."/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
-
+          local reconstruction_gt = torch.load(base_directory ..'/'..network_name .. '/CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
+          local preds = torch.load(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
 
           for i=1, preds:size()[1] do
             local image_row = {}
@@ -135,7 +131,7 @@ end
 
 
 ---------------------- GENERALIZATION ----------------------
-faceid = 4
+faceid = 1
 
 local data_location = base_directory .. '/net/CNN_DATASET/AZ_VARIED/face_' .. faceid
 print(data_location)

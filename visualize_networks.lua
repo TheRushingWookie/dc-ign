@@ -1,4 +1,4 @@
-require 'cunn'
+--require 'cunn'
 require 'pl'
 require 'paths'
 require 'optim'
@@ -34,7 +34,7 @@ require 'lfs'
 
 
 -- networks whose names contain this string will be rendered
-network_search_str = "invariance_scaled"
+network_search_str = "net"
 
 base_directory = paths.concat(lfs.currentdir(), 'networks')
 name_modifier_str = "sweep_pm_20"
@@ -103,11 +103,14 @@ for network_name in lfs.dir(base_directory) do
       print(network_name)
       local images = {}
       for _, dataset_type in ipairs(dataset_types) do
-        if lfs.attributes(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type) ~= nil then
-          local last_epoch = lastepochnum(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type)
-          local reconstruction_gt = torch.load(base_directory ..'/'..network_name .. '/CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
-          local preds = torch.load(base_directory ..'/'..network_name.."/CNN_DATASET/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
+        print(lfs.attributes(base_directory ..'/tmp/'..network_name.."/"..dataset_type) )
+        if lfs.attributes(base_directory ..'/tmp/'..network_name.."/"..dataset_type) ~= nil then
+          local last_epoch = lastepochnum(base_directory ..'/tmp/'..network_name.."/"..dataset_type)
 
+          local reconstruction_gt = torch.load('CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
+          local preds = torch.load(base_directory ..'/tmp/'..network_name.."/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
+
+          print("hi")
           for i=1, preds:size()[1] do
             local image_row = {}
             local gt_img = reconstruction_gt[i]
@@ -130,7 +133,9 @@ end
 
 ---------------------- GENERALIZATION ----------------------
 faceid = 1
+
 local data_location = base_directory .. '/net/CNN_DATASET/AZ_VARIED/face_' .. faceid
+print(data_location)
 local bsize = 20
 
 skipnum = 0

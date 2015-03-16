@@ -104,7 +104,7 @@ for network_name in lfs.dir(base_directory) do
       local images = {}
 
       for _, dataset_type in ipairs(dataset_types) do
-        print("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_"..1..'/preds' ..id)
+        print("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_".."1" ..'/preds' ..id)
         if lfs.attributes('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type) ~= nil then
           local last_epoch = lastepochnum('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type)
 

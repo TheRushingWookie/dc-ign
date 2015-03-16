@@ -102,13 +102,14 @@ for network_name in lfs.dir(base_directory) do
     if string.find(network_name, network_search_str) then
       print(network_name)
       local images = {}
+      print("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
       for _, dataset_type in ipairs(dataset_types) do
         if lfs.attributes('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type) ~= nil then
           local last_epoch = lastepochnum('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type)
 
           local reconstruction_gt = torch.load(base_directory .. "/" .. network_name .. '/CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
           local preds = torch.load("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
-          print("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
+          
           for i=1, preds:size()[1] do
             print("hi")
             local image_row = {}

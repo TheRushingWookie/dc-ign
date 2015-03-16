@@ -110,7 +110,7 @@ for network_name in lfs.dir(base_directory) do
 
           local reconstruction_gt = torch.load(base_directory .. "/" .. network_name .. '/CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
           local preds = torch.load("./tmp/mount/dc-ign/networks/my_first_dcign/"..dataset_type.."/epoch_"..last_epoch..'/preds' ..id)
-          
+          print(preds)
           for i=1, preds:size()[1] do
             print("hi")
             local image_row = {}

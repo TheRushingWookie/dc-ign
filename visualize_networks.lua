@@ -108,9 +108,8 @@ for network_name in lfs.dir(base_directory) do
           local last_epoch = lastepochnum('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type)
 
           local reconstruction_gt = torch.load(base_directory .. "/" .. network_name .. '/CNN_DATASET/th_'..dataset_type..'/FT_test/batch' .. id)
-          local preds = torch.load('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type
+          local preds = torch.load('./tmp/'.. base_directory .. "/networks" .. "/my_first_dcign/"..dataset_type)
 
-          print("hi")
           for i=1, preds:size()[1] do
             local image_row = {}
             local gt_img = reconstruction_gt[i]

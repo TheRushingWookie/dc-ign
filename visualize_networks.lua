@@ -168,6 +168,7 @@ for network_name in lfs.dir(base_directory) do
           local image_index = 1
           for filename in lfs.dir(data_location) do
             if string.sub(filename, string.len(filename) - 3, string.len(filename)) == ".png" then
+              print(filename)
               local im_tmp = image.load(data_location .. "/" .. filename)
               local im = torch.zeros(1,150, 150)
               im[1] = im_tmp[1]*0.21 + im_tmp[2]*0.72 + im_tmp[3]*0.07
